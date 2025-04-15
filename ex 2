@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Передача року народження на сервер</title>
+    <script>
+        function sendYear() {
+            var year = document.getElementById("year").value;
+
+            if (year === "" || isNaN(year) || year.length !== 4) {
+                alert("Будь ласка, введіть коректний рік народження (формат XXXX).");
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost/a2.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    document.getElementById("result").innerText = "Ви прожили " + xhr.responseText + " років.";
+                } else {
+                    document.getElementById("result").innerText = "Помилка: " + xhr.statusText;
+                }
+            };
+
+            var data = "year=" + encodeURIComponent(year);
+            xhr.send(data);
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Введіть свій рік народження:</h2>
+
+    <!-- Форма для введення року народження -->
+    <form id="form">
+        <label for="year">Рік народження:</label>
+        <input type="text" id="year" name="year"><br><br>
+
+        <button type="button" onclick="sendYear()">Відправити</button>
+    </form>
+
+    <p id="result"></p>
+
+</body>
+</html>

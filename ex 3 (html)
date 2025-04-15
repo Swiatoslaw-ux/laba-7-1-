@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма вибору статі та зросту</title>
+    <script>
+        function submitForm() {
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var height = document.getElementById("height").value;
+
+            if (!gender) {
+                alert("Будь ласка, виберіть стать.");
+                return;
+            }
+
+            if (height === "" || isNaN(height)) {
+                alert("Будь ласка, введіть коректне значення зросту в сантиметрах.");
+                return;
+            }
+
+            var genderText = gender.value === "male" ? "Чоловік" : "Жінка";
+            document.getElementById("result").innerHTML = 
+                "Стать: " + genderText + "<br>Зріст: " + height + " см";
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Форма вибору статі та зросту</h2>
+
+    <form id="genderForm">
+        <!-- Вибір статі -->
+        <label><input type="radio" name="gender" value="male"> Чоловік</label><br>
+        <label><input type="radio" name="gender" value="female"> Жінка</label><br><br>
+
+        <!-- Введення зросту -->
+        <label for="height">Введіть свій зріст (в сантиметрах):</label>
+        <input type="text" id="height" name="height"><br><br>
+
+        <!-- Кнопка для подачі форми -->
+        <button type="button" onclick="submitForm()">ІДТИ</button>
+    </form>
+
+    <p id="result"></p>
+
+</body>
+</html>

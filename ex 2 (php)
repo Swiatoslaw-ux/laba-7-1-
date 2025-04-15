@@ -1,0 +1,15 @@
+<?php
+if (isset($_POST['year'])) {
+    $year = $_POST['year'];
+
+    if (is_numeric($year) && strlen($year) == 4 && $year <= date("Y")) {
+        $currentYear = date("Y");
+        $age = $currentYear - $year;
+        echo $age;  
+    } else {
+        echo "Помилка: введіть коректний рік народження.";
+    }
+} else {
+    echo "Помилка: рік не передано.";
+}
+?>
